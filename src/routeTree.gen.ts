@@ -9,9 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RankPredictorRouteImport } from './routes/rank-predictor'
+import { Route as CutoffsRouteImport } from './routes/cutoffs'
 import { Route as CollegesRouteImport } from './routes/colleges'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollegesCodeRouteImport } from './routes/colleges.$code'
 
+const RankPredictorRoute = RankPredictorRouteImport.update({
+  id: '/rank-predictor',
+  path: '/rank-predictor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CutoffsRoute = CutoffsRouteImport.update({
+  id: '/cutoffs',
+  path: '/cutoffs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CollegesRoute = CollegesRouteImport.update({
   id: '/colleges',
   path: '/colleges',
@@ -22,35 +35,76 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollegesCodeRoute = CollegesCodeRouteImport.update({
+  id: '/$code',
+  path: '/$code',
+  getParentRoute: () => CollegesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/colleges': typeof CollegesRoute
+  '/colleges': typeof CollegesRouteWithChildren
+  '/cutoffs': typeof CutoffsRoute
+  '/rank-predictor': typeof RankPredictorRoute
+  '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/colleges': typeof CollegesRoute
+  '/colleges': typeof CollegesRouteWithChildren
+  '/cutoffs': typeof CutoffsRoute
+  '/rank-predictor': typeof RankPredictorRoute
+  '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/colleges': typeof CollegesRoute
+  '/colleges': typeof CollegesRouteWithChildren
+  '/cutoffs': typeof CutoffsRoute
+  '/rank-predictor': typeof RankPredictorRoute
+  '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/colleges'
+  fullPaths:
+    | '/'
+    | '/colleges'
+    | '/cutoffs'
+    | '/rank-predictor'
+    | '/colleges/$code'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/colleges'
-  id: '__root__' | '/' | '/colleges'
+  to: '/' | '/colleges' | '/cutoffs' | '/rank-predictor' | '/colleges/$code'
+  id:
+    | '__root__'
+    | '/'
+    | '/colleges'
+    | '/cutoffs'
+    | '/rank-predictor'
+    | '/colleges/$code'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CollegesRoute: typeof CollegesRoute
+  CollegesRoute: typeof CollegesRouteWithChildren
+  CutoffsRoute: typeof CutoffsRoute
+  RankPredictorRoute: typeof RankPredictorRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rank-predictor': {
+      id: '/rank-predictor'
+      path: '/rank-predictor'
+      fullPath: '/rank-predictor'
+      preLoaderRoute: typeof RankPredictorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cutoffs': {
+      id: '/cutoffs'
+      path: '/cutoffs'
+      fullPath: '/cutoffs'
+      preLoaderRoute: typeof CutoffsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/colleges': {
       id: '/colleges'
       path: '/colleges'
@@ -65,12 +119,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/colleges/$code': {
+      id: '/colleges/$code'
+      path: '/$code'
+      fullPath: '/colleges/$code'
+      preLoaderRoute: typeof CollegesCodeRouteImport
+      parentRoute: typeof CollegesRoute
+    }
   }
 }
 
+interface CollegesRouteChildren {
+  CollegesCodeRoute: typeof CollegesCodeRoute
+}
+
+const CollegesRouteChildren: CollegesRouteChildren = {
+  CollegesCodeRoute: CollegesCodeRoute,
+}
+
+const CollegesRouteWithChildren = CollegesRoute._addFileChildren(
+  CollegesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CollegesRoute: CollegesRoute,
+  CollegesRoute: CollegesRouteWithChildren,
+  CutoffsRoute: CutoffsRoute,
+  RankPredictorRoute: RankPredictorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
