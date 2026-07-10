@@ -9,38 +9,260 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RankPredictorRouteImport } from './routes/rank-predictor'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CutoffsRouteImport } from './routes/cutoffs'
+import { Route as CounsellingRouteImport } from './routes/counselling'
+import { Route as CollegesRouteImport } from './routes/colleges'
+import { Route as ChoiceFillingRouteImport } from './routes/choice-filling'
+import { Route as AiChatRouteImport } from './routes/ai-chat'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollegesCodeRouteImport } from './routes/colleges.$code'
+import { Route as ApiCounsellingRouteImport } from './routes/api/counselling'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RankPredictorRoute = RankPredictorRouteImport.update({
+  id: '/rank-predictor',
+  path: '/rank-predictor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CutoffsRoute = CutoffsRouteImport.update({
+  id: '/cutoffs',
+  path: '/cutoffs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellingRoute = CounsellingRouteImport.update({
+  id: '/counselling',
+  path: '/counselling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollegesRoute = CollegesRouteImport.update({
+  id: '/colleges',
+  path: '/colleges',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChoiceFillingRoute = ChoiceFillingRouteImport.update({
+  id: '/choice-filling',
+  path: '/choice-filling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiChatRoute = AiChatRouteImport.update({
+  id: '/ai-chat',
+  path: '/ai-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollegesCodeRoute = CollegesCodeRouteImport.update({
+  id: '/$code',
+  path: '/$code',
+  getParentRoute: () => CollegesRoute,
+} as any)
+const ApiCounsellingRoute = ApiCounsellingRouteImport.update({
+  id: '/api/counselling',
+  path: '/api/counselling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-chat': typeof AiChatRoute
+  '/choice-filling': typeof ChoiceFillingRoute
+  '/colleges': typeof CollegesRouteWithChildren
+  '/counselling': typeof CounsellingRoute
+  '/cutoffs': typeof CutoffsRoute
+  '/dashboard': typeof DashboardRoute
+  '/rank-predictor': typeof RankPredictorRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/counselling': typeof ApiCounsellingRoute
+  '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-chat': typeof AiChatRoute
+  '/choice-filling': typeof ChoiceFillingRoute
+  '/colleges': typeof CollegesRouteWithChildren
+  '/counselling': typeof CounsellingRoute
+  '/cutoffs': typeof CutoffsRoute
+  '/dashboard': typeof DashboardRoute
+  '/rank-predictor': typeof RankPredictorRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/counselling': typeof ApiCounsellingRoute
+  '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-chat': typeof AiChatRoute
+  '/choice-filling': typeof ChoiceFillingRoute
+  '/colleges': typeof CollegesRouteWithChildren
+  '/counselling': typeof CounsellingRoute
+  '/cutoffs': typeof CutoffsRoute
+  '/dashboard': typeof DashboardRoute
+  '/rank-predictor': typeof RankPredictorRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/counselling': typeof ApiCounsellingRoute
+  '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/ai-chat'
+    | '/choice-filling'
+    | '/colleges'
+    | '/counselling'
+    | '/cutoffs'
+    | '/dashboard'
+    | '/rank-predictor'
+    | '/sitemap.xml'
+    | '/api/chat'
+    | '/api/counselling'
+    | '/colleges/$code'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/ai-chat'
+    | '/choice-filling'
+    | '/colleges'
+    | '/counselling'
+    | '/cutoffs'
+    | '/dashboard'
+    | '/rank-predictor'
+    | '/sitemap.xml'
+    | '/api/chat'
+    | '/api/counselling'
+    | '/colleges/$code'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/ai-chat'
+    | '/choice-filling'
+    | '/colleges'
+    | '/counselling'
+    | '/cutoffs'
+    | '/dashboard'
+    | '/rank-predictor'
+    | '/sitemap.xml'
+    | '/api/chat'
+    | '/api/counselling'
+    | '/colleges/$code'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AiChatRoute: typeof AiChatRoute
+  ChoiceFillingRoute: typeof ChoiceFillingRoute
+  CollegesRoute: typeof CollegesRouteWithChildren
+  CounsellingRoute: typeof CounsellingRoute
+  CutoffsRoute: typeof CutoffsRoute
+  DashboardRoute: typeof DashboardRoute
+  RankPredictorRoute: typeof RankPredictorRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ApiCounsellingRoute: typeof ApiCounsellingRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rank-predictor': {
+      id: '/rank-predictor'
+      path: '/rank-predictor'
+      fullPath: '/rank-predictor'
+      preLoaderRoute: typeof RankPredictorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cutoffs': {
+      id: '/cutoffs'
+      path: '/cutoffs'
+      fullPath: '/cutoffs'
+      preLoaderRoute: typeof CutoffsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counselling': {
+      id: '/counselling'
+      path: '/counselling'
+      fullPath: '/counselling'
+      preLoaderRoute: typeof CounsellingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colleges': {
+      id: '/colleges'
+      path: '/colleges'
+      fullPath: '/colleges'
+      preLoaderRoute: typeof CollegesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/choice-filling': {
+      id: '/choice-filling'
+      path: '/choice-filling'
+      fullPath: '/choice-filling'
+      preLoaderRoute: typeof ChoiceFillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-chat': {
+      id: '/ai-chat'
+      path: '/ai-chat'
+      fullPath: '/ai-chat'
+      preLoaderRoute: typeof AiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +270,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/colleges/$code': {
+      id: '/colleges/$code'
+      path: '/$code'
+      fullPath: '/colleges/$code'
+      preLoaderRoute: typeof CollegesCodeRouteImport
+      parentRoute: typeof CollegesRoute
+    }
+    '/api/counselling': {
+      id: '/api/counselling'
+      path: '/api/counselling'
+      fullPath: '/api/counselling'
+      preLoaderRoute: typeof ApiCounsellingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface CollegesRouteChildren {
+  CollegesCodeRoute: typeof CollegesCodeRoute
+}
+
+const CollegesRouteChildren: CollegesRouteChildren = {
+  CollegesCodeRoute: CollegesCodeRoute,
+}
+
+const CollegesRouteWithChildren = CollegesRoute._addFileChildren(
+  CollegesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AiChatRoute: AiChatRoute,
+  ChoiceFillingRoute: ChoiceFillingRoute,
+  CollegesRoute: CollegesRouteWithChildren,
+  CounsellingRoute: CounsellingRoute,
+  CutoffsRoute: CutoffsRoute,
+  DashboardRoute: DashboardRoute,
+  RankPredictorRoute: RankPredictorRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiChatRoute: ApiChatRoute,
+  ApiCounsellingRoute: ApiCounsellingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
