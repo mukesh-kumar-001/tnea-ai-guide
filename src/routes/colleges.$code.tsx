@@ -111,7 +111,7 @@ function Detail() {
             <Card className="p-6 rounded-2xl">
               <h2 className="text-lg font-bold mb-4">Courses Offered</h2>
               <div className="grid sm:grid-cols-2 gap-3">
-                {college.branches.map((b) => (
+                {college.branches.map((b: string) => (
                   <div key={b} className="p-4 border border-border rounded-xl">
                     <div className="font-semibold text-sm">{b}</div>
                     <div className="text-xs text-muted-foreground mt-1">B.E. / B.Tech · 4 years</div>
@@ -151,7 +151,7 @@ function Detail() {
             <Card className="p-6 rounded-2xl">
               <h2 className="text-lg font-bold mb-4">Available Scholarships</h2>
               <ul className="grid sm:grid-cols-2 gap-3">
-                {college.scholarships.map((s) => (
+                {college.scholarships.map((s: string) => (
                   <li key={s} className="p-4 border border-border rounded-xl text-sm">{s}</li>
                 ))}
               </ul>
@@ -161,7 +161,7 @@ function Detail() {
           <TabsContent value="facilities" className="mt-6">
             <Card className="p-6 rounded-2xl">
               <div className="flex flex-wrap gap-2">
-                {college.facilities.map((f) => <Badge key={f} variant="secondary" className="py-1.5 px-3">{f}</Badge>)}
+                {college.facilities.map((f: string) => <Badge key={f} variant="secondary" className="py-1.5 px-3">{f}</Badge>)}
               </div>
             </Card>
           </TabsContent>
@@ -170,7 +170,7 @@ function Detail() {
             <Card className="p-6 rounded-2xl">
               <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Users className="size-5 text-primary" /> Top Recruiters</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {college.recruiters.map((r) => (
+                {college.recruiters.map((r: string) => (
                   <div key={r} className="p-4 border border-border rounded-xl text-center font-semibold text-sm">{r}</div>
                 ))}
               </div>

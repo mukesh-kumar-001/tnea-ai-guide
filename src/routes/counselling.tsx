@@ -20,7 +20,7 @@ export const Route = createFileRoute("/counselling")({
       { name: "description", content: "AI-generated dream, target and safe college recommendations for TNEA based on your rank, community and preferences." },
     ],
   }),
-  component: Counselling;
+  component: Counselling,
 });
 
 interface Reco {
