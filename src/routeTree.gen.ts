@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RankPredictorRouteImport } from './routes/rank-predictor'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CutoffsRouteImport } from './routes/cutoffs'
@@ -19,7 +20,14 @@ import { Route as AiChatRouteImport } from './routes/ai-chat'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollegesCodeRouteImport } from './routes/colleges.$code'
+import { Route as ApiCounsellingRouteImport } from './routes/api/counselling'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RankPredictorRoute = RankPredictorRouteImport.update({
   id: '/rank-predictor',
   path: '/rank-predictor',
@@ -70,6 +78,16 @@ const CollegesCodeRoute = CollegesCodeRouteImport.update({
   path: '/$code',
   getParentRoute: () => CollegesRoute,
 } as any)
+const ApiCounsellingRoute = ApiCounsellingRouteImport.update({
+  id: '/api/counselling',
+  path: '/api/counselling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +99,9 @@ export interface FileRoutesByFullPath {
   '/cutoffs': typeof CutoffsRoute
   '/dashboard': typeof DashboardRoute
   '/rank-predictor': typeof RankPredictorRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/counselling': typeof ApiCounsellingRoute
   '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +114,9 @@ export interface FileRoutesByTo {
   '/cutoffs': typeof CutoffsRoute
   '/dashboard': typeof DashboardRoute
   '/rank-predictor': typeof RankPredictorRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/counselling': typeof ApiCounsellingRoute
   '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRoutesById {
@@ -106,6 +130,9 @@ export interface FileRoutesById {
   '/cutoffs': typeof CutoffsRoute
   '/dashboard': typeof DashboardRoute
   '/rank-predictor': typeof RankPredictorRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/counselling': typeof ApiCounsellingRoute
   '/colleges/$code': typeof CollegesCodeRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +147,9 @@ export interface FileRouteTypes {
     | '/cutoffs'
     | '/dashboard'
     | '/rank-predictor'
+    | '/sitemap.xml'
+    | '/api/chat'
+    | '/api/counselling'
     | '/colleges/$code'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -132,6 +162,9 @@ export interface FileRouteTypes {
     | '/cutoffs'
     | '/dashboard'
     | '/rank-predictor'
+    | '/sitemap.xml'
+    | '/api/chat'
+    | '/api/counselling'
     | '/colleges/$code'
   id:
     | '__root__'
@@ -144,6 +177,9 @@ export interface FileRouteTypes {
     | '/cutoffs'
     | '/dashboard'
     | '/rank-predictor'
+    | '/sitemap.xml'
+    | '/api/chat'
+    | '/api/counselling'
     | '/colleges/$code'
   fileRoutesById: FileRoutesById
 }
@@ -157,10 +193,20 @@ export interface RootRouteChildren {
   CutoffsRoute: typeof CutoffsRoute
   DashboardRoute: typeof DashboardRoute
   RankPredictorRoute: typeof RankPredictorRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ApiCounsellingRoute: typeof ApiCounsellingRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rank-predictor': {
       id: '/rank-predictor'
       path: '/rank-predictor'
@@ -231,6 +277,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollegesCodeRouteImport
       parentRoute: typeof CollegesRoute
     }
+    '/api/counselling': {
+      id: '/api/counselling'
+      path: '/api/counselling'
+      fullPath: '/api/counselling'
+      preLoaderRoute: typeof ApiCounsellingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -256,6 +316,9 @@ const rootRouteChildren: RootRouteChildren = {
   CutoffsRoute: CutoffsRoute,
   DashboardRoute: DashboardRoute,
   RankPredictorRoute: RankPredictorRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiChatRoute: ApiChatRoute,
+  ApiCounsellingRoute: ApiCounsellingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
