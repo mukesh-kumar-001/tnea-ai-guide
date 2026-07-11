@@ -19,6 +19,7 @@ import { Route as ChoiceFillingRouteImport } from './routes/choice-filling'
 import { Route as AiChatRouteImport } from './routes/ai-chat'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollegesIndexRouteImport } from './routes/colleges.index'
 import { Route as CollegesCodeRouteImport } from './routes/colleges.$code'
 import { Route as ApiCounsellingRouteImport } from './routes/api/counselling'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -73,6 +74,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollegesIndexRoute = CollegesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CollegesRoute,
+} as any)
 const CollegesCodeRoute = CollegesCodeRouteImport.update({
   id: '/$code',
   path: '/$code',
@@ -103,13 +109,13 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/api/counselling': typeof ApiCounsellingRoute
   '/colleges/$code': typeof CollegesCodeRoute
+  '/colleges/': typeof CollegesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ai-chat': typeof AiChatRoute
   '/choice-filling': typeof ChoiceFillingRoute
-  '/colleges': typeof CollegesRouteWithChildren
   '/counselling': typeof CounsellingRoute
   '/cutoffs': typeof CutoffsRoute
   '/dashboard': typeof DashboardRoute
@@ -118,6 +124,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/api/counselling': typeof ApiCounsellingRoute
   '/colleges/$code': typeof CollegesCodeRoute
+  '/colleges': typeof CollegesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +141,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/api/counselling': typeof ApiCounsellingRoute
   '/colleges/$code': typeof CollegesCodeRoute
+  '/colleges/': typeof CollegesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,13 +159,13 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/counselling'
     | '/colleges/$code'
+    | '/colleges/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/ai-chat'
     | '/choice-filling'
-    | '/colleges'
     | '/counselling'
     | '/cutoffs'
     | '/dashboard'
@@ -166,6 +174,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/counselling'
     | '/colleges/$code'
+    | '/colleges'
   id:
     | '__root__'
     | '/'
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/counselling'
     | '/colleges/$code'
+    | '/colleges/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -270,6 +280,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/colleges/': {
+      id: '/colleges/'
+      path: '/'
+      fullPath: '/colleges/'
+      preLoaderRoute: typeof CollegesIndexRouteImport
+      parentRoute: typeof CollegesRoute
+    }
     '/colleges/$code': {
       id: '/colleges/$code'
       path: '/$code'
@@ -296,10 +313,12 @@ declare module '@tanstack/react-router' {
 
 interface CollegesRouteChildren {
   CollegesCodeRoute: typeof CollegesCodeRoute
+  CollegesIndexRoute: typeof CollegesIndexRoute
 }
 
 const CollegesRouteChildren: CollegesRouteChildren = {
   CollegesCodeRoute: CollegesCodeRoute,
+  CollegesIndexRoute: CollegesIndexRoute,
 }
 
 const CollegesRouteWithChildren = CollegesRoute._addFileChildren(

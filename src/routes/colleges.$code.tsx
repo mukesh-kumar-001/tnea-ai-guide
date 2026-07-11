@@ -26,6 +26,7 @@ interface BackendCollege {
 }
 
 function Detail() {
+  console.log("DETAIL PAGE RENDERED");
   const { code } = Route.useParams();
   const [college, setCollege] = useState<any>(null);
   const [loading, setLoading] = useState(true);
